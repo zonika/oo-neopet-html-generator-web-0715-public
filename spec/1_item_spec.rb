@@ -2,7 +2,7 @@ describe "Item" do
   let(:item) { Item.new }
   let(:all_items) { get_item_list }
 
-  describe "#initialize" do 
+  describe "#initialize" do
     it "can be instantiated with no arguments" do
       expect { item }.to_not raise_error
     end
@@ -25,7 +25,7 @@ describe "Item" do
     it "generates a random type from all possible item types, found in public/img/items" do
       expect(item.get_type).to satisfy{|t| all_items.include?(t)}
       container = []
-      100.times do 
+      100.times do
         container << item.get_type
       end
       expect(container.uniq.length).to be > 5

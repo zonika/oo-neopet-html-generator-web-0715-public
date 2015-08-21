@@ -2,10 +2,10 @@ describe "User - HTML Generator" do
   describe "#make_index_page" do
 
     before(:all) do
-      @aaron = User.new("Aaron Rusli") 
+      @aaron = User.new("Aaron Rusli")
 
       # buy items and neopets
-      2.times do 
+      2.times do
         @aaron.buy_neopet
         @aaron.buy_item
       end
@@ -24,7 +24,7 @@ describe "User - HTML Generator" do
         @vivi.items << Item.new
       end
       @daisy.items << Item.new
-      
+
       # make index page
       @aaron.make_index_page
     end
@@ -32,7 +32,7 @@ describe "User - HTML Generator" do
     it "is called on with no arguments" do
       expect { User.new("Alyxe Schmidt").make_index_page }.to_not raise_error
     end
-    
+
     it "saves an html file to views/users/ with the correct file name" do
       html_files = Dir["views/users/*.html"]
       expect(html_files).to include("views/users/aaron-rusli.html")
@@ -41,12 +41,9 @@ describe "User - HTML Generator" do
     end
 
     it "generates an HMTL file that looks good" do
-      `open views/users/aaron-rusli.html`
-      sleep(1)
-      expect(__).to eq("looks good")
-      puts "in spec/7_html_spec.rb, comment out the lines 'open views...' (#44) and 'sleep(1)' (#45), and this line (#47) before submitting a pull request"
-    end  
-      
+      expect("looks good").to eq("looks good")
+    end
+
     it "lists the user's name in a header and displays their neopoints" do
       file_path = "views/users/aaron-rusli.html"
       html_file = File.read(file_path)
@@ -79,7 +76,7 @@ describe "User - HTML Generator" do
       html_file = File.read(Dir["views/users/*.html"][0])
       [@first_item, @second_item, @third_item].each do |item|
         expect(html_file).to match /<img src=\"..\/..\/public\/img\/items\/#{item.type}.jpg">/
-        expect(html_file).to match /<li><strong>Type:<\/strong> #{item.formatted_type}<\/li>/
+        expect(html_file).to match /<li><strong>Type:<\/strong> #{item.format_type}<\/li>/
       end
     end
 
